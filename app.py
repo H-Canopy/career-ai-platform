@@ -775,7 +775,7 @@ with st.sidebar:
         st.session_state.current_page = st.session_state.sidebar_radio
 
     st.markdown('<p style="font-size:11px; color:var(--text-muted); margin:0 0 6px 0; letter-spacing:0.08em; text-transform:uppercase;">📋 导航</p>', unsafe_allow_html=True)
-    menu = st.radio("", ["🏠 首页总览", "📊 决策辅助", "📝 简历诊断", "💼 岗位推荐", "🤖 智能体协同", "💡 形象分析"], label_visibility="collapsed", key="sidebar_radio", on_change=on_sidebar_change)
+    menu = st.radio("", ["🏠 首页总览", "📊 决策辅助", "📝 简历诊断", "💼 岗位推荐", "🤖 智能体协同", "💡 形象分析", "📜 隐私协议"], label_visibility="collapsed", key="sidebar_radio", on_change=on_sidebar_change)
 
     st.markdown("<hr style='border-color:rgba(255,255,255,0.04); margin:16px 0;'>", unsafe_allow_html=True)
     st.markdown("""
@@ -1696,6 +1696,58 @@ MBTI：{mbti}
             st.markdown(f'<div class="glass-card" style="padding:20px 24px;"><p style="color:var(--text); line-height:1.8; white-space:pre-line;">{section_map["发展建议"]}</p></div>', unsafe_allow_html=True)
 
 
+# ===================== 隐私协议 =====================
+def privacy_policy():
+    section_banner("📜", "隐私协议与服务条款", "我们重视你的数据安全与隐私权利")
+
+    st.markdown("""
+    <div class="glass-card" style="padding:28px 32px;">
+
+    <h3 style="margin-top:0;">🔒 隐私保护声明</h3>
+    <p style="color:var(--text); line-height:1.8;">
+    本平台（大学生AI职业规划平台）高度重视用户隐私。我们承诺：
+    </p>
+    <ul style="color:var(--text); line-height:2.0;">
+    <li><strong>不存储个人信息</strong> — 你在决策辅助、简历诊断、形象分析中填写的信息仅用于本次AI分析，分析完成后不落盘、不保留。</li>
+    <li><strong>不上传简历文件</strong> — 简历诊断中上传的 Word/PDF 文件仅在内存中解析文本，解析后立即丢弃，文件本身不会被存储或传输至第三方。</li>
+    <li><strong>API 调用加密</strong> — 所有与 DeepSeek API 的通信均通过 HTTPS 加密传输，API 密钥存储于服务端安全环境变量中。</li>
+    </ul>
+
+    <h3>📋 信息收集说明</h3>
+    <p style="color:var(--text); line-height:1.8;">
+    本平台<strong>不收集</strong>以下信息：
+    </p>
+    <ul style="color:var(--text); line-height:2.0;">
+    <li>真实姓名、身份证号、手机号等个人身份信息</li>
+    <li>浏览器 Cookie、浏览记录、设备指纹</li>
+    <li>地理位置（除你在问卷中主动填写的城市外）</li>
+    </ul>
+    <p style="color:var(--text); line-height:1.8;">
+    平台仅在 Streamlit Cloud 框架层面记录基本的访问日志（IP、访问时间），用于服务监控，不会与你的个人数据关联。
+    </p>
+
+    <h3>⚖️ 服务条款</h3>
+    <ol style="color:var(--text); line-height:2.0;">
+    <li><strong>仅供参考</strong> — 本平台提供的AI分析结果仅作为职业规划的参考建议，不构成专业的职业咨询或法律建议。重大职业决策请结合实际情况并咨询专业人士。</li>
+    <li><strong>合理使用</strong> — 请勿利用本平台进行任何违法、违规或滥用行为，包括但不限于批量自动化请求、注入恶意提示词等。</li>
+    <li><strong>内容责任</strong> — 用户自行对输入的内容负责。AI生成的输出内容可能存在误差，平台不对输出的准确性、完整性做任何保证。</li>
+    <li><strong>服务可用性</strong> — 本平台基于 Streamlit Cloud 免费托管，不保证7×24小时可用。如遇服务中断，敬请谅解。</li>
+    <li><strong>条款变更</strong> — 我们保留随时更新本协议的权利，更新后的条款将在本页面公示。</li>
+    </ol>
+
+    <h3>📧 联系方式</h3>
+    <p style="color:var(--text); line-height:1.8;">
+    如对本隐私协议有任何疑问或建议，请通过 GitHub Issues 联系我们：
+    <a href="https://github.com/H-Canopy/career-ai-platform/issues" target="_blank" style="color:var(--accent);">github.com/H-Canopy/career-ai-platform/issues</a>
+    </p>
+
+    <p style="color:var(--text-muted); font-size:12px; margin-top:24px; text-align:center;">
+    最后更新：2026年5月29日
+    </p>
+
+    </div>
+    """, unsafe_allow_html=True)
+
 # ===================== 路由 =====================
 page = st.session_state.current_page
 if page == "🏠 首页总览":
@@ -1710,6 +1762,8 @@ elif page == "🤖 智能体协同":
     agent_collab_mode()
 elif page == "💡 形象分析":
     persona_analyzer()
+elif page == "📜 隐私协议":
+    privacy_policy()
 
 st.markdown("""
 <div class="footer">
