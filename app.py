@@ -402,13 +402,38 @@ button[data-testid="stExpandSidebarButton"]:hover {
     border-color: rgba(255,255,255,0.25) !important;
 }
 
-/* -- 下拉框防遮挡 -- */
+/* -- 下拉框防遮挡 + 手机端暗黑适配 -- */
 [data-baseweb="select"] [role="listbox"],
 [data-baseweb="popover"] {
     z-index: 999999 !important;
 }
 div[data-baseweb="select"] {
     margin-bottom: 8px;
+}
+/* 下拉选项文字颜色（修手机端灰白看不清） */
+select option,
+[data-baseweb="select"] [role="option"],
+[data-baseweb="select"] li,
+[data-baseweb="popover"] [role="option"],
+[data-baseweb="popover"] li,
+ul[role="listbox"] li {
+    background: var(--surface) !important;
+    color: var(--text) !important;
+}
+/* 下拉框输入/显示的文字 */
+div[data-baseweb="select"] input,
+div[data-baseweb="select"] [data-testid="stSelectbox"] {
+    color: var(--text) !important;
+}
+/* MultiSelect 标签 */
+div[data-baseweb="tag"] {
+    background: var(--surface-alt) !important;
+    color: var(--text) !important;
+}
+/* 下拉框 hover 高亮 */
+[data-baseweb="select"] [role="option"]:hover,
+ul[role="listbox"] li:hover {
+    background: var(--surface-hover) !important;
 }
 
 /* -- Reduced motion -- */
@@ -1286,17 +1311,11 @@ def resume_doctor():
     st.markdown('<div class="glass-card">', unsafe_allow_html=True)
 
     # 文件上传区
-    st.markdown("""
-    <div style="font-size:15px; font-weight:600; color:var(--accent); margin-bottom:14px;">
-        📂 导入简历文件（Word / PDF）
-    </div>
-    """, unsafe_allow_html=True)
-
     uploaded = st.file_uploader(
-        "支持 .docx / .pdf 格式，上传后自动解析",
+        "📂 导入简历文件（Word / PDF）",
         type=["docx", "pdf"],
         key="resume_uploader",
-        label_visibility="collapsed"
+        help="支持 .docx / .pdf 格式，上传后自动解析"
     )
 
     if uploaded is not None:
