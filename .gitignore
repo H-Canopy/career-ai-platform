@@ -1,0 +1,24 @@
+# Streamlit secrets（含 API 密钥，绝不提交）
+.streamlit/secrets.toml
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# 日志
+*.log
+
+# 临时文件
+*.tmp
+replace_css.py
+theme_zara.css
+test_api.py
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
