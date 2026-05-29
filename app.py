@@ -1013,6 +1013,30 @@ def _score_career_paths(info):
         scores["🎓 考研深造"] += 5
         scores["🚀 自主创业"] += 5
 
+    # 学校水平
+    school = info.get("school_level", "")
+    if school in ("985/211/双一流"):
+        scores["🎓 考研深造"] += 10
+        scores["💼 直接就业"] += 8
+        scores["🚀 自主创业"] += 3
+    elif school in ("一本"):
+        scores["🎓 考研深造"] += 6
+        scores["💼 直接就业"] += 5
+    elif school in ("二本", "专科/高职"):
+        scores["🏛️ 考公务员"] += 8
+        scores["💼 直接就业"] += 2
+        scores["🚀 自主创业"] += 5
+
+    # 所在城市
+    city = info.get("city", "")
+    tier1 = ["北京", "上海", "深圳", "广州", "杭州", "成都", "武汉", "南京", "苏州", "重庆"]
+    if any(c in city for c in tier1):
+        scores["💼 直接就业"] += 6
+        scores["🚀 自主创业"] += 4
+    elif city.strip():
+        scores["💼 直接就业"] += 2
+        scores["🏛️ 考公务员"] += 4
+
     # AI/创业兴趣加成
     interest = info.get("interest", "")
     if any(k in interest for k in ["AI", "人工智能", "创业", "产品", "商业", "独立开发"]):
@@ -1055,6 +1079,8 @@ def career_advisor():
         ("🎓", "你的专业是什么？", "major", "text", {"placeholder": "例如：计算机科学与技术"}),
         ("📚", "你现在读几年级？", "grade_year", "select", {"options": ["大一", "大二", "大三", "大四", "研一", "研二", "研三", "已毕业"]}),
         ("📈", "你的成绩排名大概在？", "grade", "select", {"options": ["前5%", "前10%", "前20%", "前30%", "前50%", "其他"]}),
+        ("🏫", "你的学校属于什么水平？", "school_level", "select", {"options": ["985/211/双一流", "一本", "二本", "专科/高职", "海外高校", "其他"]}),
+        ("📍", "你现在所在的城市是？", "city", "text", {"placeholder": "例如：广州、成都、武汉…"}),
         ("💡", "你对什么方向感兴趣？<br><span style='font-size:13px;color:var(--text-muted);'>AI、开发、产品、设计、数据分析、金融、教育…</span>", "interest", "textarea", {"placeholder": "描述你的兴趣方向，可以写多个"}),
         ("🎯", "现阶段你最看重什么？", "focus", "radio", {"options": ["💰 赚钱", "🛡 稳定", "📈 发展", "🚀 成就感", "🤔 不确定"]}),
         ("🏠", "你的家庭经济状况怎么样？", "family", "radio", {"options": ["比较宽松，支持我慢慢来", "一般，能供我读完书", "比较紧张，希望早点经济独立", "不方便说"]}),
@@ -1074,9 +1100,9 @@ def career_advisor():
             <div style="font-size:40px; margin-bottom:12px;">👋</div>
             <h3 style="color:var(--text); margin-bottom:10px;">先了解你，才能给好建议</h3>
             <p style="color:var(--text-secondary); font-size:14px; max-width:500px; margin:0 auto 16px auto;">
-            我会问你 <strong style="color:var(--accent);">8 个简单问题</strong>，然后从
+            我会问你 <strong style="color:var(--accent);">10 个简单问题</strong>，然后从
             <strong style="color:var(--accent);">就业 · 考研 · 考公 · 创业</strong>
-            四条路径为你做全面分析。整个过程只需 <strong>2 分钟</strong>。
+            四条路径为你做全面分析。整个过程只需 <strong>3 分钟</strong>。
             </p>
         </div>
         """, unsafe_allow_html=True)
@@ -1215,6 +1241,8 @@ def career_advisor():
                 "major": st.session_state.ca_info.get("major", ""),
                 "年级": st.session_state.ca_info.get("grade_year", ""),
                 "成绩排名": st.session_state.ca_info.get("grade", ""),
+                "学校水平": st.session_state.ca_info.get("school_level", ""),
+                "所在城市": st.session_state.ca_info.get("city", ""),
                 "兴趣方向": st.session_state.ca_info.get("interest", ""),
                 "核心诉求": st.session_state.ca_info.get("focus", ""),
                 "家庭经济": st.session_state.ca_info.get("family", ""),
