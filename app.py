@@ -92,6 +92,13 @@ p, div, span, li, label {
     color: var(--text) !important;
     font-family: 'Inter', -apple-system, sans-serif !important;
 }
+/* Material Icons 必须保留字体，否则图标文字会暴露为普通文字 */
+span[data-testid="stIconMaterial"] {
+    font-family: "Material Icons" !important;
+    font-size: 24px !important;
+    color: var(--text-muted) !important;
+    line-height: 1 !important;
+}
 
 /* -- Sidebar -- */
 section[data-testid="stSidebar"] {
