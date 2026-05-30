@@ -198,27 +198,36 @@ input:focus, textarea:focus {
     outline: none !important;
 }
 
-/* -- Select / MultiSelect -- */
+/* -- Select / MultiSelect（手机端全量修复） -- */
 div[data-baseweb="select"] {
     background: var(--surface) !important;
     border: 1px solid var(--border) !important;
     border-radius: var(--radius) !important;
 }
-/* 去掉 select 点击时的黑框 */
+/* 暴力去除所有 focus 黑框（包括内层 input/div） */
+div[data-baseweb="select"] *:focus,
+div[data-baseweb="select"] *:focus-visible,
 div[data-baseweb="select"]:focus-within,
-div[data-baseweb="select"] > div:focus,
-div[data-baseweb="select"] [tabindex],
-div[data-baseweb="select"] div[class*="control"]:focus-within {
+div[data-baseweb="select"] [tabindex]:focus {
     outline: none !important;
     box-shadow: none !important;
+}
+div[data-baseweb="select"]:focus-within {
     border-color: var(--accent) !important;
 }
-/* 手机端选中值文字强制亮色 */
-div[data-baseweb="select"] span[class*="ValueContainer"],
+/* 选中值显示文字 → 强制亮白色（iOS Safari 安全） */
+div[data-baseweb="select"] *,
+div[data-baseweb="select"] span,
+div[data-baseweb="select"] div[class*="Value"],
 div[data-baseweb="select"] div[class*="singleValue"],
+div[data-baseweb="select"] input {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+}
+/* placeholder 稍微暗一点以区分 */
 div[data-baseweb="select"] div[class*="placeholder"] {
-    color: var(--text) !important;
-    -webkit-text-fill-color: var(--text) !important;
+    color: #888893 !important;
+    -webkit-text-fill-color: #888893 !important;
 }
 
 /* -- Slider -- */
@@ -433,36 +442,39 @@ button[data-testid="stExpandSidebarButton"]:hover {
 div[data-baseweb="select"] {
     margin-bottom: 8px;
 }
-/* 下拉选项文字颜色（手机端强制黑色/深色） */
-select option,
-[data-baseweb="select"] [role="option"],
-[data-baseweb="select"] li,
-[data-baseweb="popover"] [role="option"],
+/* 下拉选项：背景深色 + 文字纯白（硬编码，不走CSS变量） */
+[data-baseweb="popover"] *,
 [data-baseweb="popover"] li,
+[data-baseweb="popover"] [role="option"],
+[data-baseweb="select"] [role="listbox"] *,
+ul[role="listbox"] *,
 ul[role="listbox"] li {
-    background: #1E1E28 !important;
+    background: #1A1A24 !important;
     color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
 }
-/* 下拉选项选中态 */
+/* 选中态 */
 [data-baseweb="select"] [aria-selected="true"],
 [data-baseweb="popover"] [aria-selected="true"] {
-    background: rgba(129, 140, 248, 0.15) !important;
-    color: var(--accent) !important;
+    background: rgba(129, 140, 248, 0.18) !important;
+    color: #818CF8 !important;
 }
 /* 下拉框输入/显示的文字 */
 div[data-baseweb="select"] input,
 div[data-baseweb="select"] [data-testid="stSelectbox"] {
-    color: var(--text) !important;
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
 }
 /* MultiSelect 标签 */
 div[data-baseweb="tag"] {
     background: var(--surface-alt) !important;
-    color: var(--text) !important;
+    color: #FFFFFF !important;
 }
-/* 下拉框 hover 高亮 */
+/* 下拉框 hover */
 [data-baseweb="select"] [role="option"]:hover,
-ul[role="listbox"] li:hover {
-    background: rgba(129, 140, 248, 0.12) !important;
+ul[role="listbox"] li:hover,
+[data-baseweb="popover"] li:hover {
+    background: rgba(129, 140, 248, 0.14) !important;
     color: #FFFFFF !important;
 }
 
