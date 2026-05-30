@@ -204,6 +204,22 @@ div[data-baseweb="select"] {
     border: 1px solid var(--border) !important;
     border-radius: var(--radius) !important;
 }
+/* 去掉 select 点击时的黑框 */
+div[data-baseweb="select"]:focus-within,
+div[data-baseweb="select"] > div:focus,
+div[data-baseweb="select"] [tabindex],
+div[data-baseweb="select"] div[class*="control"]:focus-within {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: var(--accent) !important;
+}
+/* 手机端选中值文字强制亮色 */
+div[data-baseweb="select"] span[class*="ValueContainer"],
+div[data-baseweb="select"] div[class*="singleValue"],
+div[data-baseweb="select"] div[class*="placeholder"] {
+    color: var(--text) !important;
+    -webkit-text-fill-color: var(--text) !important;
+}
 
 /* -- Slider -- */
 div[data-testid="stSlider"] * { color: var(--text) !important; }
@@ -417,15 +433,21 @@ button[data-testid="stExpandSidebarButton"]:hover {
 div[data-baseweb="select"] {
     margin-bottom: 8px;
 }
-/* 下拉选项文字颜色（修手机端灰白看不清） */
+/* 下拉选项文字颜色（手机端强制黑色/深色） */
 select option,
 [data-baseweb="select"] [role="option"],
 [data-baseweb="select"] li,
 [data-baseweb="popover"] [role="option"],
 [data-baseweb="popover"] li,
 ul[role="listbox"] li {
-    background: var(--surface) !important;
-    color: var(--text) !important;
+    background: #1E1E28 !important;
+    color: #FFFFFF !important;
+}
+/* 下拉选项选中态 */
+[data-baseweb="select"] [aria-selected="true"],
+[data-baseweb="popover"] [aria-selected="true"] {
+    background: rgba(129, 140, 248, 0.15) !important;
+    color: var(--accent) !important;
 }
 /* 下拉框输入/显示的文字 */
 div[data-baseweb="select"] input,
@@ -440,7 +462,8 @@ div[data-baseweb="tag"] {
 /* 下拉框 hover 高亮 */
 [data-baseweb="select"] [role="option"]:hover,
 ul[role="listbox"] li:hover {
-    background: var(--surface-hover) !important;
+    background: rgba(129, 140, 248, 0.12) !important;
+    color: #FFFFFF !important;
 }
 
 /* -- Reduced motion -- */
