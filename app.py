@@ -47,7 +47,15 @@ st.markdown("""
 
 /* -- Global -- */
 .stApp { background: var(--bg); }
-html { scroll-behavior: smooth; color-scheme: dark; }
+html, body, .stApp, #root, section, main, [data-testid="stAppViewContainer"] {
+    scroll-behavior: smooth;
+    color-scheme: dark !important;
+}
+/* 手机端：所有表单控件强制暗黑渲染（iOS Safari/Android Chrome） */
+@media (hover: none) and (pointer: coarse) {
+    *, *::before, *::after { color-scheme: dark !important; }
+    input, select, textarea, button { color-scheme: dark !important; }
+}
 
 /* -- Typography -- */
 h1, h2, h3, h4, h5, h6 {
@@ -200,11 +208,20 @@ input:focus, textarea:focus {
 
 /* -- Select / MultiSelect（手机端全量修复） -- */
 div[data-baseweb="select"] {
-    background: var(--surface) !important;
-    border: 1px solid var(--border) !important;
+    background: #0F0F17 !important;
+    border: 1px solid rgba(255,255,255,0.10) !important;
     border-radius: var(--radius) !important;
 }
-/* 暴力去除所有 focus 黑框（包括内层 input/div） */
+/* 所有内层元素硬编码暗黑背景 */
+div[data-baseweb="select"] * {
+    background-color: transparent !important;
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+}
+div[data-baseweb="select"] > div {
+    background: #0F0F17 !important;
+}
+/* 暴力去除所有 focus 黑框 */
 div[data-baseweb="select"] *:focus,
 div[data-baseweb="select"] *:focus-visible,
 div[data-baseweb="select"]:focus-within,
@@ -215,19 +232,29 @@ div[data-baseweb="select"] [tabindex]:focus {
 div[data-baseweb="select"]:focus-within {
     border-color: var(--accent) !important;
 }
-/* 选中值显示文字 → 强制亮白色（iOS Safari 安全） */
-div[data-baseweb="select"] *,
-div[data-baseweb="select"] span,
+/* selected value container */
 div[data-baseweb="select"] div[class*="Value"],
-div[data-baseweb="select"] div[class*="singleValue"],
-div[data-baseweb="select"] input {
+div[data-baseweb="select"] div[class*="singleValue"] {
+    background: #0F0F17 !important;
     color: #FFFFFF !important;
     -webkit-text-fill-color: #FFFFFF !important;
 }
-/* placeholder 稍微暗一点以区分 */
+/* placeholder */
 div[data-baseweb="select"] div[class*="placeholder"] {
     color: #888893 !important;
     -webkit-text-fill-color: #888893 !important;
+}
+/* 下拉箭头 */
+div[data-baseweb="select"] svg { fill: #888893 !important; }
+/* 移动端 select 盒子本身强制黑底 */
+@media (hover: none) and (pointer: coarse) {
+    div[data-baseweb="select"],
+    div[data-baseweb="select"] > div,
+    div[data-baseweb="select"] * {
+        background-color: #0F0F17 !important;
+        color: #FFFFFF !important;
+        -webkit-text-fill-color: #FFFFFF !important;
+    }
 }
 
 /* -- Slider -- */
