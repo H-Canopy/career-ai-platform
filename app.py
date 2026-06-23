@@ -59,18 +59,19 @@ html, body, .stApp, #root, section, main, [data-testid="stAppViewContainer"] {
 
 /* -- Typography -- */
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Inter', -apple-system, sans-serif !important;
+    font-family: 'Syne', 'Inter', -apple-system, sans-serif !important;
     color: var(--text) !important;
-    font-weight: 600 !important;
-    letter-spacing: -0.02em;
-    line-height: 1.3;
+    font-weight: 700 !important;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
 }
-h1 { font-size: 2.2rem !important; letter-spacing: -0.03em !important; }
-h2 { font-size: 1.6rem !important; }
-h3 { font-size: 1.2rem !important; }
+h1 { font-size: 2.4rem !important; letter-spacing: 0.03em !important; }
+h2 { font-size: 1.8rem !important; }
+h3 { font-size: 1.3rem !important; }
 
 /* -- Gradient Title (Full-Spectrum Rainbow) -- */
 .gradient-title, .gradient-title * {
+    font-family: 'Syne', 'Inter', sans-serif !important;
     background: linear-gradient(135deg,
         #C5A880 0%,
         #DBC8A0 20%,
@@ -84,7 +85,8 @@ h3 { font-size: 1.2rem !important; }
     color: transparent !important;
     -webkit-text-fill-color: transparent !important;
     font-weight: 800 !important;
-    letter-spacing: -0.03em !important;
+    font-size: 2.6rem !important;
+    letter-spacing: 0.04em !important;
     animation: goldShimmer 4s ease-in-out infinite;
     background-size: 300% 300% !important;
 }
@@ -108,7 +110,7 @@ span[data-testid="stIconMaterial"] {
 /* -- Sidebar -- */
 section[data-testid="stSidebar"] {
     background: var(--sidebar) !important;
-    border-right: 1px solid var(--border) !important;
+    border-right: 1px solid rgba(197, 168, 128, 0.08) !important;
 }
 section[data-testid="stSidebar"] .stMarkdown,
 section[data-testid="stSidebar"] label,
@@ -121,7 +123,8 @@ section[data-testid="stSidebar"] div {
 section[data-testid="stSidebar"] h2,
 section[data-testid="stSidebar"] h3 {
     color: var(--text) !important;
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Syne', sans-serif !important;
+    letter-spacing: 0.06em;
 }
 section[data-testid="stSidebar"] [data-testid="stRadio"] label {
     color: var(--text-secondary) !important;
@@ -356,7 +359,9 @@ div[data-testid="stNotification"] {
     transition: border-color 0.2s;
 }
 .glass-card:hover {
-    border-color: var(--border-hover) !important;
+    border-color: rgba(197, 168, 128, 0.35) !important;
+    box-shadow: 0 4px 24px rgba(197, 168, 128, 0.08) !important;
+    transform: translateY(-2px);
 }
 
 /* -- Footer -- */
