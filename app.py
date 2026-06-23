@@ -23,24 +23,24 @@ st.markdown("""
 <style>
 /* ============================================================
  *  Dark Premium — Modern dark theme for AI Career Platform
- *  Inter + subtle indigo accent, layered depth
+ *  Inter + warm gold accent, layered depth · Canopy Style
  * ============================================================ */
-@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Syne:wght@400;500;600;700;800&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,700&display=swap');
 
 /* -- Palette -- */
 :root {
-    --bg: #0B0B12;
-    --surface: #14141F;
-    --surface-alt: #1A1A28;
-    --sidebar: #08080C;
+    --bg: #0d0c0a;
+    --surface: #181714;
+    --surface-alt: #1e1c18;
+    --sidebar: #0a0908;
     --text: #EDEDF0;
-    --text-secondary: #9494A8;
-    --text-muted: #5C5C70;
-    --accent: #818CF8;
-    --accent-hover: #6366F1;
-    --accent-subtle: rgba(129, 140, 248, 0.10);
+    --text-secondary: #A8A49C;
+    --text-muted: #6B6860;
+    --accent: #C5A880;
+    --accent-hover: #A88D65;
+    --accent-subtle: rgba(197, 168, 128, 0.10);
     --border: rgba(255, 255, 255, 0.06);
-    --border-hover: rgba(255, 255, 255, 0.12);
+    --border-hover: rgba(197, 168, 128, 0.15);
     --success: #4ADE80;
     --radius: 10px;
 }
@@ -72,15 +72,12 @@ h3 { font-size: 1.2rem !important; }
 /* -- Gradient Title (Full-Spectrum Rainbow) -- */
 .gradient-title, .gradient-title * {
     background: linear-gradient(135deg,
-        #FF6B6B 0%,    /* 珊瑚红 */
-        #FECA57 12%,   /* 金黄 */
-        #48DBFB 25%,   /* 天蓝 */
-        #FF9FF3 37%,   /* 粉紫 */
-        #54A0FF 50%,   /* 宝蓝 */
-        #5F27CD 62%,   /* 深紫 */
-        #FF6B6B 75%,   /* 回到珊瑚红 */
-        #FECA57 87%,   /* 金黄 */
-        #48DBFB 100%   /* 天蓝 */
+        #C5A880 0%,
+        #DBC8A0 20%,
+        #F0E0C0 40%,
+        #C5A880 60%,
+        #DBC8A0 80%,
+        #C5A880 100%
     ) !important;
     -webkit-background-clip: text !important;
     background-clip: text !important;
@@ -88,10 +85,10 @@ h3 { font-size: 1.2rem !important; }
     -webkit-text-fill-color: transparent !important;
     font-weight: 800 !important;
     letter-spacing: -0.03em !important;
-    animation: rainbowFlow 4s linear infinite;
-    background-size: 400% 400% !important;
+    animation: goldShimmer 4s ease-in-out infinite;
+    background-size: 300% 300% !important;
 }
-@keyframes rainbowFlow {
+@keyframes goldShimmer {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
@@ -154,7 +151,7 @@ button[kind="primary"], .stButton > button {
 }
 button[kind="primary"]:hover, .stButton > button:hover {
     background: var(--accent-hover) !important;
-    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3) !important;
+    box-shadow: 0 4px 20px rgba(197, 168, 128, 0.25) !important;
     transform: translateY(-1px);
 }
 button[kind="secondary"], [data-testid="stBaseButton-secondary"] {
@@ -208,7 +205,7 @@ input:focus, textarea:focus {
 
 /* -- Select / MultiSelect（手机端全量修复） -- */
 div[data-baseweb="select"] {
-    background: #0F0F17 !important;
+    background: #181714 !important;
     border: 1px solid rgba(255,255,255,0.10) !important;
     border-radius: var(--radius) !important;
 }
@@ -219,7 +216,7 @@ div[data-baseweb="select"] * {
     -webkit-text-fill-color: #FFFFFF !important;
 }
 div[data-baseweb="select"] > div {
-    background: #0F0F17 !important;
+    background: #181714 !important;
 }
 /* 暴力去除所有 focus 黑框 */
 div[data-baseweb="select"] *:focus,
@@ -235,7 +232,7 @@ div[data-baseweb="select"]:focus-within {
 /* selected value container */
 div[data-baseweb="select"] div[class*="Value"],
 div[data-baseweb="select"] div[class*="singleValue"] {
-    background: #0F0F17 !important;
+    background: #181714 !important;
     color: #FFFFFF !important;
     -webkit-text-fill-color: #FFFFFF !important;
 }
@@ -484,7 +481,7 @@ ul[role="listbox"] li {
 [data-baseweb="select"] [aria-selected="true"],
 [data-baseweb="popover"] [aria-selected="true"] {
     background: rgba(129, 140, 248, 0.18) !important;
-    color: #818CF8 !important;
+    color: #C5A880 !important;
 }
 /* 下拉框输入/显示的文字 */
 div[data-baseweb="select"] input,
@@ -1262,7 +1259,7 @@ def career_advisor():
 
         # ---- 评分卡片 ----
         st.markdown('<h4 style="color:var(--text); margin-bottom:16px;">📊 路径匹配度评分</h4>', unsafe_allow_html=True)
-        path_colors = {"💼 直接就业": "#10b981", "🎓 考研深造": "#d0b2ff",
+        path_colors = {"💼 直接就业": "#10b981", "🎓 考研深造": "#C5A880",
                        "🏛️ 考公务员": "#f59e0b", "🚀 自主创业": "#ef4444"}
         cols = st.columns(4)
         for i, (path, score) in enumerate(sorted_paths):
@@ -1282,7 +1279,7 @@ def career_advisor():
         # ---- 进度条对比 ----
         st.markdown("<br>", unsafe_allow_html=True)
         for path, score in sorted_paths:
-            color = "#10b981" if score >= 70 else "#d0b2ff" if score >= 50 else "#f59e0b" if score >= 30 else "#ef4444"
+            color = "#10b981" if score >= 70 else "#C5A880" if score >= 50 else "#f59e0b" if score >= 30 else "#ef4444"
             st.markdown(f"""
             <div style="margin-bottom:10px;">
                 <div style="display:flex; justify-content:space-between; font-size:14px; margin-bottom:3px;">
@@ -1535,7 +1532,7 @@ def agent_collab_mode():
     st.markdown("""
     <div style="display:flex; align-items:center; justify-content:center; gap:0; padding:20px; margin-bottom:28px;" class="glass-card">
         <div style="text-align:center; padding:12px 20px;">
-            <div style="width:56px;height:56px;border-radius:16px;background:radial-gradient(circle at 30% 30%, #A78BFA, #6366F1);display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 8px;">🧠</div>
+            <div style="width:56px;height:56px;border-radius:16px;background:radial-gradient(circle at 30% 30%, #D4B896, #C5A880);display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 8px;">🧠</div>
             <div style="font-weight:700;color:var(--text);font-size:14px;">Planner</div>
             <div style="font-size:11px;color:var(--text-muted);">意图识别 · 任务分解</div>
         </div>
@@ -1711,17 +1708,17 @@ MBTI：{mbti}
         fig.patch.set_facecolor('#0B0B12')
         ax.set_facecolor('#0B0B12')
 
-        ax.fill(angles, values, color='#818CF8', alpha=0.2)
-        ax.plot(angles, values, color='#A5B4FC', linewidth=2.5)
-        ax.scatter(angles[:-1], values[:-1], color='#C4B5FD', s=50, zorder=3)
+        ax.fill(angles, values, color='#C5A880', alpha=0.2)
+        ax.plot(angles, values, color='#D4B896', linewidth=2.5)
+        ax.scatter(angles[:-1], values[:-1], color='#E8D5B7', s=50, zorder=3)
 
         ax.set_xticks(angles[:-1])
         ax.set_xticklabels(labels, color='#C5CBD8', fontsize=10, fontfamily='sans-serif')
         ax.set_ylim(0, 100)
         ax.set_yticks([20, 40, 60, 80, 100])
         ax.set_yticklabels(['20', '40', '60', '80', '100'], color='#666', fontsize=7)
-        ax.spines['polar'].set_color('#2A2A3A')
-        ax.grid(color='#2A2A3A', linewidth=0.5)
+        ax.spines['polar'].set_color('#2E2D28')
+        ax.grid(color='#2E2D28', linewidth=0.5)
         ax.set_title(f'{name} · 能力六维', color='#EDEDF0', fontsize=14, fontweight='bold', pad=18)
 
         st.pyplot(fig, use_container_width=False)
